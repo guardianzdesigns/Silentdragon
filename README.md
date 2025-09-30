@@ -1,179 +1,3301 @@
-Guardianz - Premium HTML Template
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guardianz - Premium HTML Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <style>
+        :root {
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
+            --accent: #ff6b6b;
+            --dark: #2c2c54;
+            --light: #f7f7f7;
+            --gray: #aaa;
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --section-padding: 100px 0;
+            --header-height: 80px;
+            
+            /* Dark mode variables */
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --footer-bg: var(--dark);
+            --footer-text: #ffffff;
+        }
 
-A modern, responsive, and feature-rich HTML template designed for businesses, portfolios, and creative agencies.
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #f7f7f7;
+            --card-bg: #1e1e1e;
+            --footer-bg: #0a0a0a;
+            --footer-text: #f7f7f7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-color: var(--bg-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
 
-🌟 Features
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
 
-Design & UI
+        .btn-outline::before {
+            background: var(--primary);
+        }
 
-· Fully Responsive - Optimized for all devices (mobile, tablet, desktop)
-· Dark/Light Mode - Toggle between themes with system preference detection
-· Modern Design - Clean, minimal interface following current web trends
-· Smooth Animations - CSS transitions and JavaScript animations
-· Custom Cursor - Interactive cursor with hover effects
-· Particles.js Background - Dynamic particle animation on hero section
+        .btn-outline:hover {
+            color: white;
+        }
+        
+        .section {
+            padding: var(--section-padding);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
 
-Pages & Layouts
+        .section-title p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            transition: var(--transition);
+            height: var(--header-height);
+        }
+        
+        header.sticky {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
 
-· Homepage - Complete landing page with all sections
-· Dashboard - Admin dashboard with stats and activity feed
-· Inbox - Email-style messaging interface
-· Calendar - Event management with monthly view
-· Settings - User preferences and profile management
+        [data-theme="dark"] header {
+            background: rgba(30, 30, 30, 0.95);
+        }
 
-Components
+        [data-theme="dark"] header.sticky {
+            background: rgba(30, 30, 30, 0.98);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
 
-· Navigation - Sticky header with mega menu
-· Portfolio Grid - Filterable project showcase
-· Testimonials - Swiper.js powered testimonial slider
-· Contact Form - Validated contact form with success/error states
-· Footer - Comprehensive footer with newsletter signup
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu li {
+            margin: 0 12px;
+            position: relative;
+        }
+        
+        .nav-menu > li > a {
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 10px 0;
+            position: relative;
+        }
 
-🚀 Quick Start
+        .nav-menu > li > a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
 
-1. Download the template
-   · Save the HTML file as index.html
-2. Open in browser
-   · Double-click the file or serve via local server
-3. Customize
-   · Modify content, colors, and images as needed
-   · Update contact information and links
+        .nav-menu > li > a:hover::after,
+        .nav-menu > li > a.active::after {
+            width: 100%;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary);
+        }
 
-🎨 Customization
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 100;
+        }
 
-Color Scheme
+        .nav-menu li:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
 
-The template uses CSS custom properties for easy theming:
+        .mega-menu-col h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
 
-```css
-:root {
-    --primary: #4e54c8;
-    --secondary: #8f94fb;
-    --accent: #ff6b6b;
-    --dark: #2c2c54;
-    --light: #f7f7f7;
-}
-```
+        .mega-menu-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
 
-Dark Mode
+        .mega-menu-col ul li {
+            margin: 12px 0;
+        }
 
-Toggle between light and dark themes using the switch in the header or respect system preferences.
+        .mega-menu-col ul li a {
+            transition: var(--transition);
+            display: block;
+        }
 
-Fonts
+        .mega-menu-col ul li a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
 
-· Primary Font: Poppins (Google Fonts)
-· Icon Library: Font Awesome 6.4.0
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
 
-📱 Pages Overview
+        .theme-switch {
+            display: inline-block;
+            position: relative;
+            width: 60px;
+            height: 34px;
+        }
 
-Home Page
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-· Hero section with typewriter effect
-· Features grid
-· Portfolio showcase with filtering
-· Testimonials slider
-· Contact form
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--dark);
+            transition: .4s;
+            border-radius: 34px;
+        }
 
-Dashboard
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
 
-· Statistics cards
-· Activity feed
-· Quick access buttons
-· Responsive grid layout
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
 
-Inbox
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
 
-· Message list with read/unread states
-· Sidebar filters and labels
-· Search functionality
-· Bulk actions
+        .slider i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
 
-Calendar
+        .slider .fa-sun {
+            left: 8px;
+            color: #ffc107;
+        }
 
-· Monthly calendar view
-· Event management
-· Multiple calendar support
-· Responsive grid
+        .slider .fa-moon {
+            right: 8px;
+            color: #fff;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            color: var(--text-color);
+        }
+        
+        /* Page Content */
+        .page-content {
+            display: none;
+            padding-top: calc(var(--header-height) + 40px);
+            min-height: calc(100vh - var(--header-height));
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        /* Dashboard Page */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .stat-icon.blue {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+        }
+        
+        .stat-icon.green {
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+        }
+        
+        .stat-icon.orange {
+            background: linear-gradient(to right, #FF9800, #FF5722);
+        }
+        
+        .stat-icon.purple {
+            background: linear-gradient(to right, #9C27B0, #673AB7);
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .stat-title {
+            font-size: 16px;
+            color: var(--gray);
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        .activity-feed, .quick-access {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            background: var(--primary);
+        }
+        
+        .activity-content h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .activity-content p {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .quick-access-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .quick-access-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: rgba(78, 84, 200, 0.1);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .quick-access-item:hover {
+            background: rgba(78, 84, 200, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .quick-access-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            color: white;
+            background: var(--primary);
+        }
+        
+        .quick-access-title {
+            font-size: 14px;
+            text-align: center;
+            color: var(--text-color);
+        }
+        
+        /* Settings Page */
+        .settings-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+        
+        .settings-sidebar {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+        }
+        
+        .settings-menu {
+            list-style: none;
+        }
+        
+        .settings-menu li {
+            margin-bottom: 10px;
+        }
+        
+        .settings-menu a {
+            display: block;
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+        
+        .settings-menu a:hover,
+        .settings-menu a.active {
+            background: rgba(78, 84, 200, 0.1);
+            color: var(--primary);
+        }
+        
+        .settings-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .settings-content {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+        
+        .settings-section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .settings-section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .settings-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(78, 84, 200, 0.1);
+            outline: none;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider-round {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider-round:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider-round {
+            background-color: var(--primary);
+        }
+        
+        input:checked + .slider-round:before {
+            transform: translateX(26px);
+        }
+        
+        /* Inbox Page */
+        .inbox-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+        
+        .inbox-sidebar {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+        }
+        
+        .inbox-filters {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .inbox-filters li {
+            margin-bottom: 10px;
+        }
+        
+        .inbox-filters a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+        
+        .inbox-filters a:hover,
+        .inbox-filters a.active {
+            background: rgba(78, 84, 200, 0.1);
+            color: var(--primary);
+        }
+        
+        .inbox-filters a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .inbox-filters .badge {
+            margin-left: auto;
+            background: var(--primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .inbox-labels {
+            margin-top: 30px;
+        }
+        
+        .inbox-labels h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        .label-list {
+            list-style: none;
+        }
+        
+        .label-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .label-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .label-name {
+            flex: 1;
+            font-size: 14px;
+        }
+        
+        .inbox-content {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+        
+        .inbox-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .inbox-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .inbox-search {
+            position: relative;
+            width: 250px;
+        }
+        
+        .inbox-search input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .inbox-search i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .inbox-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .message-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .message-item:hover {
+            background: rgba(78, 84, 200, 0.05);
+        }
+        
+        .message-item.unread {
+            background: rgba(78, 84, 200, 0.03);
+            font-weight: 500;
+        }
+        
+        .message-checkbox {
+            margin-right: 15px;
+        }
+        
+        .message-sender {
+            width: 200px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .message-content {
+            flex: 1;
+            margin: 0 15px;
+        }
+        
+        .message-subject {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+        
+        .message-preview {
+            font-size: 14px;
+            color: var(--gray);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .message-time {
+            width: 80px;
+            text-align: right;
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .message-attachment {
+            margin-left: 15px;
+            color: var(--gray);
+        }
+        
+        /* Calendar Page */
+        .calendar-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+        
+        .calendar-sidebar {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+        }
+        
+        .calendar-create {
+            margin-bottom: 30px;
+        }
+        
+        .calendar-list {
+            margin-top: 30px;
+        }
+        
+        .calendar-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .calendar-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .calendar-name {
+            flex: 1;
+            font-size: 14px;
+        }
+        
+        .calendar-content {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+        }
+        
+        .calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .calendar-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .calendar-view {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        
+        .calendar-day-header {
+            text-align: center;
+            padding: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .calendar-day {
+            height: 80px;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            background: rgba(0, 0, 0, 0.02);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .calendar-day:hover {
+            background: rgba(78, 84, 200, 0.1);
+        }
+        
+        .calendar-day.other-month {
+            opacity: 0.3;
+        }
+        
+        .calendar-day.today {
+            background: rgba(78, 84, 200, 0.2);
+        }
+        
+        .day-number {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .calendar-event {
+            font-size: 12px;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(to right, rgba(78, 84, 200, 0.8), rgba(143, 148, 251, 0.8)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-Settings
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
 
-· User profile management
-· Preference toggles
-· Organized sidebar navigation
-· Form controls
+        .typewriter {
+            display: inline-block;
+        }
 
-🔧 Technical Details
+        .typewriter-text {
+            overflow: hidden;
+            border-right: 2px solid white;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-Dependencies
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
 
-· Font Awesome 6.4.0 - Icons
-· Poppins Google Font - Typography
-· Swiper.js 9 - Testimonial slider
-· Particles.js - Background animation
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: white;
+            font-size: 40px;
+            z-index: 1;
+        }
+        
+        /* Features */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-box {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
 
-Browser Support
+        .feature-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: var(--transition);
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+        }
 
-· Chrome (latest)
-· Firefox (latest)
-· Safari (latest)
-· Edge (latest)
+        .feature-box:hover::before {
+            height: 100%;
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 25px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
 
-File Structure
+        .feature-box:hover .feature-icon {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+        
+        /* Portfolio */
+        .portfolio {
+            background: var(--light);
+        }
 
-```
-navigationtemp.html
-├── CSS (Embedded)
-├── JavaScript (Embedded)
-└── External Dependencies (CDN)
-```
+        [data-theme="dark"] .portfolio {
+            background: #1a1a1a;
+        }
+        
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+            gap: 10px;
+        }
 
-🛠️ Development
+        .portfolio-filters button {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
 
-Adding New Pages
+        .portfolio-filters button.active,
+        .portfolio-filters button:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            height: 300px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(78, 84, 200, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
 
-1. Create a new page-content div with unique ID
-2. Add navigation link with data-page attribute
-3. Update JavaScript page navigation logic if needed
+        .portfolio-overlay h3 {
+            color: white;
+            font-size: 22px;
+            margin-bottom: 10px;
+            transform: translateY(-20px);
+            transition: var(--transition);
+            opacity: 0;
+        }
 
-Modifying Styles
+        .portfolio-overlay p {
+            color: white;
+            margin-bottom: 20px;
+            transform: translateY(20px);
+            transition: var(--transition);
+            opacity: 0;
+        }
 
-All CSS is embedded in the <style> section. Key sections:
+        .portfolio-overlay .btn {
+            transform: translateY(20px);
+            transition: var(--transition);
+            opacity: 0;
+        }
 
-· :root - CSS variables for theming
-· Responsive breakpoints
-· Component-specific styles
+        .portfolio-item:hover .portfolio-overlay h3,
+        .portfolio-item:hover .portfolio-overlay p,
+        .portfolio-item:hover .portfolio-overlay .btn {
+            transform: translateY(0);
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+        
+        /* Testimonials */
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
 
-JavaScript Functions
+        .testimonials-slider {
+            overflow: hidden;
+        }
+        
+        .testimonial {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            margin: 20px;
+            position: relative;
+        }
 
-· Page navigation system
-· Theme switching
-· Form validation
-· Portfolio filtering
-· Testimonial slider
-· Smooth scrolling
-· Animation triggers
+        .testimonial::before {
+            content: '\201C';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 60px;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: sans-serif;
+        }
+        
+        .testimonial-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid var(--light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-📞 Support
+        [data-theme="dark"] .testimonial-img {
+            border-color: #2a2a2a;
+        }
+        
+        .testimonial-content p {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
 
-For support or customization requests, contact:
+        .testimonial-author h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
 
-· Email: guardianzdesigns@gmail.com
-· Template: Guardianz Premium HTML Template
+        .testimonial-author p {
+            color: var(--gray);
+            font-size: 14px;
+        }
 
-📄 License
+        .testimonial-rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
 
-This template is licensed for personal and commercial use. Please attribute the design to Guardianz if redistributed.
+        .swiper-pagination {
+            position: relative;
+            margin-top: 40px;
+        }
 
-🔄 Updates
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: var(--gray);
+            opacity: 0.5;
+            transition: var(--transition);
+        }
 
-Regular updates include:
+        .swiper-pagination-bullet-active {
+            background: var(--primary);
+            opacity: 1;
+            transform: scale(1.2);
+        }
 
-· Bug fixes
-· Browser compatibility improvements
-· New features and components
-· Performance optimizations
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 15px;
+        }
 
----
+        .testimonial-nav button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
 
-Designed and Developed by Guardianz
-Creating premium quality templates for modern web experiences.
+        .testimonial-nav button:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Contact */
+        .contact {
+            background: var(--light);
+        }
+
+        [data-theme="dark"] .contact {
+            background: #1a1a1a;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-form {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .contact-info {
+            margin-top: 30px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .contact-info-content h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .contact-info-content p {
+            color: var(--gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(78, 84, 200, 0.1);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-label {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            pointer-events: none;
+            transition: var(--transition);
+            background: var(--card-bg);
+            padding: 0 5px;
+            color: var(--gray);
+        }
+
+        .form-control:focus + .form-label,
+        .form-control:not(:placeholder-shown) + .form-label {
+            top: -10px;
+            font-size: 12px;
+            color: var(--primary);
+        }
+
+        .form-message {
+            display: none;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .form-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 80px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-links h3,
+        .footer-newsletter h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h3::after,
+        .footer-newsletter h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            opacity: 0.8;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .footer-links ul li a:hover {
+            opacity: 1;
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-newsletter p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 0 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: var(--secondary);
+        }
+
+        .newsletter-message {
+            font-size: 14px;
+            display: none;
+        }
+
+        .newsletter-message.success {
+            color: #4ade80;
+        }
+
+        .newsletter-message.error {
+            color: #f87171;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .preloader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(78, 84, 200, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            mix-blend-mode: difference;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            opacity: 0.3;
+        }
+
+        /* Animations */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-30px) translateX(-50%); }
+            60% { transform: translateY(-15px) translateX(-50%); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .mega-menu {
+                grid-template-columns: repeat(2, 1fr);
+                width: 600px;
+                left: 50%;
+                transform: translateX(-50%) translateY(20px);
+            }
+
+            .nav-menu li:hover .mega-menu {
+                transform: translateX(-50%) translateY(0);
+            }
+            
+            .dashboard-content,
+            .settings-container,
+            .inbox-container,
+            .calendar-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --header-height: 70px;
+                --section-padding: 80px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: var(--header-height);
+                right: -100%;
+                background: var(--card-bg);
+                width: 280px;
+                height: calc(100vh - var(--header-height));
+                flex-direction: column;
+                padding: 40px 20px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: 0.4s;
+                overflow-y: auto;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+                width: 100%;
+            }
+
+            .nav-menu > li > a::after {
+                display: none;
+            }
+
+            .mega-menu {
+                position: static;
+                width: 100%;
+                display: none;
+                box-shadow: none;
+                padding: 20px 0 20px 20px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: transparent;
+            }
+
+            .nav-menu li:hover .mega-menu {
+                transform: none;
+            }
+
+            .mega-menu.active {
+                display: grid;
+            }
+
+            .mega-menu-col h4 {
+                font-size: 16px;
+            }
+
+            .theme-switch-wrapper {
+                margin-left: 0;
+                justify-content: center;
+                margin-top: 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial {
+                padding: 30px 20px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-links h3::after,
+            .footer-newsletter h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-form button {
+                border-radius: 4px;
+                padding: 12px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .message-sender {
+                width: 120px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .feature-box {
+                padding: 30px 20px;
+            }
+
+            .testimonial::before {
+                top: 10px;
+                left: 10px;
+                font-size: 40px;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+            
+            .message-item {
+                flex-wrap: wrap;
+            }
+            
+            .message-sender {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .message-content {
+                margin: 0;
+                width: 100%;
+            }
+            
+            .message-time {
+                width: auto;
+                text-align: left;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    Guardian<span>z</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" data-page="inbox">Inbox</a></li>
+                    <li><a href="#" class="nav-link" data-page="calendar">Calendar</a></li>
+                    <li><a href="#" class="nav-link" data-page="settings">Settings</a></li>
+                    <li>
+                        <a href="#features">Features <i class="fas fa-chevron-down"></i></a>
+                        <div class="mega-menu">
+                            <div class="mega-menu-col">
+                                <h4>Layouts</h4>
+                                <ul>
+                                    <li><a href="#">Homepage</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Services</a></li>
+                                    <li><a href="#">Portfolio</a></li>
+                                    <li><a href="#">Blog</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-col">
+                                <h4>Pages</h4>
+                                <ul>
+                                    <li><a href="#">Team</a></li>
+                                    <li><a href="#">Pricing</a></li>
+                                    <li><a href="#">Testimonials</a></li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-col">
+                                <h4>Elements</h4>
+                                <ul>
+                                    <li><a href="#">Buttons</a></li>
+                                    <li><a href="#">Forms</a></li>
+                                    <li><a href="#">Accordions</a></li>
+                                    <li><a href="#">Tabs</a></li>
+                                    <li><a href="#">Icons</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-col">
+                                <h4>Special Pages</h4>
+                                <ul>
+                                    <li><a href="#">404 Page</a></li>
+                                    <li><a href="#">Coming Soon</a></li>
+                                    <li><a href="#">Login</a></li>
+                                    <li><a href="#">Register</a></li>
+                                    <li><a href="#">Thank You</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </div>
+                    </label>
+                </div>
+                <button class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page-content active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div id="particles-js"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Premium HTML Template for Your Next Project</h1>
+                    <div class="typewriter">
+                        <div class="typewriter-text">A modern, responsive and customizable template</div>
+                    </div>
+                    <p>Perfect for businesses, portfolios, and creative agencies. Packed with amazing features and modern design.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn">Get Started</a>
+                        <a href="#portfolio" class="btn btn-outline">View Portfolio</a>
+                    </div>
+                </div>
+            </div>
+            <a href="#features" class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section" id="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Amazing Features</h2>
+                    <p>Everything you need to create a stunning website</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Fully Responsive</h3>
+                        <p>Looks great on any device, from mobile to desktop and everything in between.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Modern Design</h3>
+                        <p>Clean, minimal design following the latest trends in web design.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Clean Code</h3>
+                        <p>Well-organized, commented code that's easy to customize and extend.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Fast Performance</h3>
+                        <p>Optimized for speed and performance to ensure the best user experience.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3>Easy Customization</h3>
+                        <p>Change colors, fonts, and layouts with easy-to-follow documentation.</p>
+                    </div>
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Premium Support</h3>
+                        <p>Dedicated support team to help you with any questions or issues.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="section portfolio" id="portfolio">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Portfolio</h2>
+                    <p>Check out our latest projects</p>
+                </div>
+                <div class="portfolio-filters">
+                    <button class="active" data-filter="all">All</button>
+                    <button data-filter="web">Web Design</button>
+                    <button data-filter="development">Development</button>
+                    <button data-filter="branding">Branding</button>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" data-category="web">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Project" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3>E-commerce Website</h3>
+                            <p>Modern e-commerce solution with responsive design</p>
+                            <a href="#" class="btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="development">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Project" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3>Mobile App UI</h3>
+                            <p>Clean and intuitive mobile application interface</p>
+                            <a href="#" class="btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="branding">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Project" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3>Brand Identity</h3>
+                            <p>Complete brand identity package for startup</p>
+                            <a href="#" class="btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="web">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Project" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3>Dashboard UI</h3>
+                            <p>Analytics dashboard with modern design</p>
+                            <a href="#" class="btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="development">
+                        <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Project" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3>API Integration</h3>
+                            <p>Custom API development and integration</p>
+                            <a href="#" class="btn">View Project</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="branding">
+                        <img src="https://images.unsplash.com/photo-1567446537738-74804ee3a9bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Project" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3>Logo Design</h3>
+                            <p>Creative logo design for tech company</p>
+                            <a href="#" class="btn">View Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section" id="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Client Testimonials</h2>
+                    <p>What our clients say about us</p>
+                </div>
+                <div class="testimonials-container">
+                    <div class="testimonials-slider swiper">
+                        <div class="swiper-wrapper">
+                            <div class="testimonial swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" class="testimonial-img">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>"This template is absolutely amazing! It helped me create my website in no time. The code is clean and well documented. The support team is also very helpful and responsive."</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <h4>John Doe</h4>
+                                    <p>CEO, Company Inc.</p>
+                                </div>
+                            </div>
+                            <div class="testimonial swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" class="testimonial-img">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>"I've tried many templates, but this one stands out. The design is modern and the support is excellent. Highly recommended! It saved me countless hours of development time."</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <h4>Jane Smith</h4>
+                                    <p>Designer, Creative Studio</p>
+                                </div>
+                            </div>
+                            <div class="testimonial swiper-slide">
+                                <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Client" class="testimonial-img">
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <div class="testimonial-content">
+                                    <p>"The attention to detail in this template is impressive. Everything works seamlessly, and the documentation made customization a breeze. Will definitely use again for future projects."</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <h4>Michael Johnson</h4>
+                                    <p>Developer, Tech Solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="testimonial-nav">
+                        <button class="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section contact" id="contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with us</p>
+                </div>
+                <div class="contact-container">
+                    <div>
+                        <h3>Get in Touch</h3>
+                        <p>Have a project in mind? Want to use our template? Feel free to contact us.</p>
+                        <div class="contact-info">
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-info-content">
+                                    <h4>Location</h4>
+                                    <p>123 Design Street, Creative City</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-info-content">
+                                    <h4>Email</h4>
+                                    <p>guardianzdesigns@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-info-content">
+                                    <h4>Phone</h4>
+                                    <p>+123 456 7890</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social-links" style="justify-content: flex-start; margin-top: 30px;">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-dribbble"></i></a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="name" placeholder=" " required>
+                                <label for="name" class="form-label">Your Name</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email" placeholder=" " required>
+                                <label for="email" class="form-label">Your Email</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="subject" placeholder=" ">
+                                <label for="subject" class="form-label">Subject</label>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" id="message" placeholder=" " required></textarea>
+                                <label for="message" class="form-label">Your Message</label>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                            <div class="form-message success" id="formSuccess">Thank you! Your message has been sent.</div>
+                            <div class="form-message error" id="formError">Error! Please try again.</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Dashboard</h2>
+                <p>Welcome to your personalized dashboard</p>
+            </div>
+            
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number">2,548</div>
+                    <div class="stat-title">Total Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-number">5,281</div>
+                    <div class="stat-title">Total Orders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-number">$28,742</div>
+                    <div class="stat-title">Total Revenue</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-number">1,258</div>
+                    <div class="stat-title">New Comments</div>
+                </div>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="activity-feed">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>New User Registered</h4>
+                            <p>John Doe joined the platform 5 minutes ago</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>New Order Received</h4>
+                            <p>Order #2844 for $129.99 was placed</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>New Comment</h4>
+                            <p>Jane Smith commented on "Product Review"</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Revenue Update</h4>
+                            <p>Monthly revenue increased by 15%</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>System Notification</h4>
+                            <p>Server maintenance scheduled for tomorrow</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-access">
+                    <h3>Quick Access</h3>
+                    <div class="quick-access-grid">
+                        <div class="quick-access-item">
+                            <div class="quick-access-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="quick-access-title">New Project</div>
+                        </div>
+                        <div class="quick-access-item">
+                            <div class="quick-access-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="quick-access-title">Add User</div>
+                        </div>
+                        <div class="quick-access-item">
+                            <div class="quick-access-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="quick-access-title">Reports</div>
+                        </div>
+                        <div class="quick-access-item">
+                            <div class="quick-access-icon">
+                                <i class="fas fa-cog"></i>
+                            </div>
+                            <div class="quick-access-title">Settings</div>
+                        </div>
+                        <div class="quick-access-item">
+                            <div class="quick-access-icon">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="quick-access-title">Notifications</div>
+                        </div>
+                        <div class="quick-access-item">
+                            <div class="quick-access-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="quick-access-title">Help Center</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inbox Page -->
+    <div id="inbox-page" class="page-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Inbox</h2>
+                <p>Manage your messages and communications</p>
+            </div>
+            
+            <div class="inbox-container">
+                <div class="inbox-sidebar">
+                    <button class="btn" style="width: 100%; margin-bottom: 20px;">
+                        <i class="fas fa-plus"></i> Compose
+                    </button>
+                    
+                    <ul class="inbox-filters">
+                        <li><a href="#" class="active"><i class="fas fa-inbox"></i> Inbox <span class="badge">12</span></a></li>
+                        <li><a href="#"><i class="fas fa-paper-plane"></i> Sent</a></li>
+                        <li><a href="#"><i class="fas fa-edit"></i> Drafts <span class="badge">3</span></a></li>
+                        <li><a href="#"><i class="fas fa-trash"></i> Trash</a></li>
+                        <li><a href="#"><i class="fas fa-exclamation-circle"></i> Important</a></li>
+                        <li><a href="#"><i class="fas fa-star"></i> Starred</a></li>
+                    </ul>
+                    
+                    <div class="inbox-labels">
+                        <h4>Labels</h4>
+                        <ul class="label-list">
+                            <li>
+                                <div class="label-color" style="background: #4e54c8;"></div>
+                                <span class="label-name">Work</span>
+                            </li>
+                            <li>
+                                <div class="label-color" style="background: #8f94fb;"></div>
+                                <span class="label-name">Personal</span>
+                            </li>
+                            <li>
+                                <div class="label-color" style="background: #ff6b6b;"></div>
+                                <span class="label-name">Urgent</span>
+                            </li>
+                            <li>
+                                <div class="label-color" style="background: #4CAF50;"></div>
+                                <span class="label-name">Projects</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="inbox-content">
+                    <div class="inbox-header">
+                        <div class="inbox-actions">
+                            <button><i class="fas fa-sync-alt"></i></button>
+                            <button><i class="fas fa-trash"></i></button>
+                            <button><i class="fas fa-envelope"></i></button>
+                            <button><i class="fas fa-folder"></i></button>
+                        </div>
+                        <div class="inbox-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search messages...">
+                        </div>
+                    </div>
+                    
+                    <div class="inbox-list">
+                        <div class="message-item unread">
+                            <div class="message-checkbox">
+                                <input type="checkbox">
+                            </div>
+                            <div class="message-sender">John Doe</div>
+                            <div class="message-content">
+                                <div class="message-subject">Project Update Meeting</div>
+                                <div class="message-preview">Hi there, let's schedule a meeting to discuss the latest project updates...</div>
+                            </div>
+                            <div class="message-time">9:42 AM</div>
+                            <div class="message-attachment">
+                                <i class="fas fa-paperclip"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="message-item unread">
+                            <div class="message-checkbox">
+                                <input type="checkbox">
+                            </div>
+                            <div class="message-sender">Sarah Johnson</div>
+                            <div class="message-content">
+                                <div class="message-subject">Design Assets Ready</div>
+                                <div class="message-preview">The design assets you requested are now ready for review. Please take a look...</div>
+                            </div>
+                            <div class="message-time">Yesterday</div>
+                            <div class="message-attachment">
+                                <i class="fas fa-paperclip"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="message-item">
+                            <div class="message-checkbox">
+                                <input type="checkbox">
+                            </div>
+                            <div class="message-sender">Mike Wilson</div>
+                            <div class="message-content">
+                                <div class="message-subject">Weekly Report</div>
+                                <div class="message-preview">Attached is the weekly performance report. Let me know if you have any questions...</div>
+                            </div>
+                            <div class="message-time">Jun 12</div>
+                            <div class="message-attachment">
+                                <i class="fas fa-paperclip"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="message-item">
+                            <div class="message-checkbox">
+                                <input type="checkbox">
+                            </div>
+                            <div class="message-sender">Guardianz Team</div>
+                            <div class="message-content">
+                                <div class="message-subject">New Features Released</div>
+                                <div class="message-preview">We're excited to announce that new features have been released. Check them out...</div>
+                            </div>
+                            <div class="message-time">Jun 10</div>
+                            <div class="message-attachment"></div>
+                        </div>
+                        
+                        <div class="message-item">
+                            <div class="message-checkbox">
+                                <input type="checkbox">
+                            </div>
+                            <div class="message-sender">Lisa Anderson</div>
+                            <div class="message-content">
+                                <div class="message-subject">Conference Invitation</div>
+                                <div class="message-preview">You're invited to speak at our annual tech conference. Details inside...</div>
+                            </div>
+                            <div class="message-time">Jun 8</div>
+                            <div class="message-attachment"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar Page -->
+    <div id="calendar-page" class="page-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Calendar</h2>
+                <p>Manage your schedule and events</p>
+            </div>
+            
+            <div class="calendar-container">
+                <div class="calendar-sidebar">
+                    <button class="btn" style="width: 100%; margin-bottom: 20px;">
+                        <i class="fas fa-plus"></i> New Event
+                    </button>
+                    
+                    <div class="calendar-list">
+                        <h4>My Calendars</h4>
+                        <div class="calendar-item">
+                            <div class="calendar-color" style="background: #4e54c8;"></div>
+                            <span class="calendar-name">Work</span>
+                            <input type="checkbox" checked>
+                        </div>
+                        <div class="calendar-item">
+                            <div class="calendar-color" style="background: #8f94fb;"></div>
+                            <span class="calendar-name">Personal</span>
+                            <input type="checkbox" checked>
+                        </div>
+                        <div class="calendar-item">
+                            <div class="calendar-color" style="background: #ff6b6b;"></div>
+                            <span class="calendar-name">Family</span>
+                            <input type="checkbox" checked>
+                        </div>
+                        <div class="calendar-item">
+                            <div class="calendar-color" style="background: #4CAF50;"></div>
+                            <span class="calendar-name">Holidays</span>
+                            <input type="checkbox" checked>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calendar-content">
+                    <div class="calendar-header">
+                        <div class="calendar-nav">
+                            <button><i class="fas fa-chevron-left"></i></button>
+                            <h3 class="calendar-title">June 2023</h3>
+                            <button><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="calendar-view">
+                            <button class="btn-outline">Month</button>
+                            <button class="btn-outline">Week</button>
+                            <button class="btn">Day</button>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-grid">
+                        <div class="calendar-day-header">Sun</div>
+                        <div class="calendar-day-header">Mon</div>
+                        <div class="calendar-day-header">Tue</div>
+                        <div class="calendar-day-header">Wed</div>
+                        <div class="calendar-day-header">Thu</div>
+                        <div class="calendar-day-header">Fri</div>
+                        <div class="calendar-day-header">Sat</div>
+                        
+                        <div class="calendar-day other-month">
+                            <div class="day-number">28</div>
+                        </div>
+                        <div class="calendar-day other-month">
+                            <div class="day-number">29</div>
+                        </div>
+                        <div class="calendar-day other-month">
+                            <div class="day-number">30</div>
+                        </div>
+                        <div class="calendar-day other-month">
+                            <div class="day-number">31</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">1</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">2</div>
+                            <div class="calendar-event" style="background: rgba(78, 84, 200, 0.2);">Team Meeting</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">3</div>
+                        </div>
+                        
+                        <div class="calendar-day">
+                            <div class="day-number">4</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">5</div>
+                            <div class="calendar-event" style="background: rgba(143, 148, 251, 0.2);">Lunch with Sarah</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">6</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">7</div>
+                            <div class="calendar-event" style="background: rgba(255, 107, 107, 0.2);">Doctor Appointment</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">8</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">9</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">10</div>
+                        </div>
+                        
+                        <div class="calendar-day">
+                            <div class="day-number">11</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">12</div>
+                            <div class="calendar-event" style="background: rgba(78, 84, 200, 0.2);">Project Deadline</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">13</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">14</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">15</div>
+                            <div class="calendar-event" style="background: rgba(76, 175, 80, 0.2);">Company Party</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">16</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">17</div>
+                        </div>
+                        
+                        <div class="calendar-day">
+                            <div class="day-number">18</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">19</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">20</div>
+                            <div class="calendar-event" style="background: rgba(78, 84, 200, 0.2);">Conference Call</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">21</div>
+                        </div>
+                        <div class="calendar-day today">
+                            <div class="day-number">22</div>
+                            <div class="calendar-event" style="background: rgba(255, 107, 107, 0.2);">Dentist</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">23</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">24</div>
+                        </div>
+                        
+                        <div class="calendar-day">
+                            <div class="day-number">25</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">26</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">27</div>
+                            <div class="calendar-event" style="background: rgba(143, 148, 251, 0.2);">Dinner Party</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">28</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">29</div>
+                        </div>
+                        <div class="calendar-day">
+                            <div class="day-number">30</div>
+                        </div>
+                        <div class="calendar-day other-month">
+                            <div class="day-number">1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Page -->
+    <div id="settings-page" class="page-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Settings</h2>
+                <p>Customize your experience</p>
+            </div>
+            
+            <div class="settings-container">
+                <div class="settings-sidebar">
+                    <ul class="settings-menu">
+                        <li><a href="#" class="active"><i class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="#"><i class="fas fa-lock"></i> Security</a></li>
+                        <li><a href="#"><i class="fas fa-bell"></i> Notifications</a></li>
+                        <li><a href="#"><i class="fas fa-paint-brush"></i> Appearance</a></li>
+                        <li><a href="#"><i class="fas fa-language"></i> Language</a></li>
+                        <li><a href="#"><i class="fas fa-database"></i> Storage</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+                    </ul>
+                </div>
+                
+                <div class="settings-content">
+                    <div class="settings-section">
+                        <h3>Profile Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" value="John">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" value="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" value="john.doe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Bio</label>
+                            <textarea class="form-control" rows="4">Creative designer and developer with passion for building beautiful user experiences.</textarea>
+                        </div>
+                        <button class="btn">Save Changes</button>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>Preferences</h3>
+                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <label class="form-label">Email Notifications</label>
+                                <p class="form-text">Receive email notifications for important updates</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider-round"></span>
+                            </label>
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <label class="form-label">Public Profile</label>
+                                <p class="form-text">Make your profile visible to other users</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider-round"></span>
+                            </label>
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <label class="form-label">Dark Mode</label>
+                                <p class="form-text">Switch between light and dark themes</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="settings-dark-mode">
+                                <span class="slider-round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Guardianz</div>
+                    <p>Creating premium quality templates and designs for our clients worldwide. We focus on quality, innovation, and customer satisfaction.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
+                        <li><a href="#" class="nav-link" data-page="inbox">Inbox</a></li>
+                        <li><a href="#" class="nav-link" data-page="calendar">Calendar</a></li>
+                        <li><a href="#" class="nav-link" data-page="settings">Settings</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Web Design</a></li>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Product Design</a></li>
+                        <li><a href="#">Graphic Design</a></li>
+                        <li><a href="#">Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter to get updates on our latest templates and designs.</p>
+                    <form id="newsletterForm">
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="Your Email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                        <div class="newsletter-message success" id="newsletterSuccess">Thank you for subscribing!</div>
+                        <div class="newsletter-message error" id="newsletterError">Please enter a valid email address.</div>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Guardianz. All Rights Reserved. Designed by <a href="mailto:guardianzdesigns@gmail.com">Guardianz</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            setTimeout(function() {
+                preloader.classList.add('hidden');
+            }, 1000);
+        });
+
+        // Page Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links and pages
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.page-content').forEach(page => page.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Show corresponding page
+                const pageId = this.getAttribute('data-page') + '-page';
+                document.getElementById(pageId).classList.add('active');
+                
+                // Close mobile menu if open
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // Sticky Header
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            const backToTop = document.querySelector('.back-to-top');
+            
+            if (window.scrollY > 50) {
+                header.classList.add('sticky');
+            } else {
+                header.classList.remove('sticky');
+            }
+
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            hamburger.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Theme Switch
+        const themeSwitch = document.getElementById('checkbox');
+        const settingsThemeSwitch = document.getElementById('settings-dark-mode');
+        
+        // Check for saved theme preference or respect OS preference
+        if (localStorage.getItem('theme') === 'dark' || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme'))) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeSwitch.checked = true;
+            if (settingsThemeSwitch) settingsThemeSwitch.checked = true;
+        }
+        
+        themeSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                if (settingsThemeSwitch) settingsThemeSwitch.checked = true;
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                if (settingsThemeSwitch) settingsThemeSwitch.checked = false;
+            }
+        });
+
+        // Settings theme switch
+        if (settingsThemeSwitch) {
+            settingsThemeSwitch.addEventListener('change', function() {
+                if (this.checked) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeSwitch.checked = true;
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    themeSwitch.checked = false;
+                }
+            });
+        }
+
+        // Portfolio Filter
+        const filterButtons = document.querySelectorAll('.portfolio-filters button');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get filter value
+                const filterValue = button.getAttribute('data-filter');
+                
+                // Filter portfolio items
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Testimonial Slider
+        const testimonialSwiper = new Swiper('.testimonials-slider', {
+            loop: true,
+            spaceBetween: 30,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.testimonial-next',
+                prevEl: '.testimonial-prev',
+            },
+        });
+
+        // Contact Form Validation
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+        const formError = document.getElementById('formError');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simple validation
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && email && message) {
+                    // Simulate form submission
+                    formSuccess.style.display = 'block';
+                    formError.style.display = 'none';
+                    contactForm.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        formSuccess.style.display = 'none';
+                    }, 5000);
+                } else {
+                    formError.style.display = 'block';
+                    formSuccess.style.display = 'none';
+                    
+                    // Hide error message after 5 seconds
+                    setTimeout(() => {
+                        formError.style.display = 'none';
+                    }, 5000);
+                }
+            });
+        }
+
+        // Newsletter Form
+        const newsletterForm = document.getElementById('newsletterForm');
+        const newsletterSuccess = document.getElementById('newsletterSuccess');
+        const newsletterError = document.getElementById('newsletterError');
+
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = newsletterForm.querySelector('input[type="email"]').value;
+                
+                // Simple email validation
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (emailPattern.test(email)) {
+                    newsletterSuccess.style.display = 'block';
+                    newsletterError.style.display = 'none';
+                    newsletterForm.reset();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        newsletterSuccess.style.display = 'none';
+                    }, 5000);
+                } else {
+                    newsletterError.style.display = 'block';
+                    newsletterSuccess.style.display = 'none';
+                    
+                    // Hide error message after 5 seconds
+                    setTimeout(() => {
+                        newsletterError.style.display = 'none';
+                    }, 5000);
+                }
+            });
+        }
+
+        // Back to Top
+        const backToTop = document.querySelector('.back-to-top');
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Particles.js Configuration
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        if (cursor && cursorFollower) {
+            document.addEventListener('mousemove', function(e) {
+                cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+                
+                // Add a slight delay to the follower for a trailing effect
+                setTimeout(() => {
+                    cursorFollower.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+                }, 100);
+            });
+            
+            // Change cursor style on interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .portfolio-item, .swiper-pagination-bullet');
+            
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursorFollower.style.transform = 'scale(1.2)';
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursorFollower.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.classList.contains('nav-link')) return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.feature-box, .portfolio-item, .testimonial, .section-title');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize elements for animation
+        document.querySelectorAll('.feature-box, .portfolio-item, .testimonial, .section-title').forEach(element => {
+            element.style.opacity = 0;
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        // Initial check on page load
+        animateOnScroll();
+    </script>
+</body>
+</html>
